@@ -6,8 +6,8 @@ const bodyParser = require('body-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
-//const passport = require('./config/passport');
 
+//mongoose
 mongoose
   .connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((x) => console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`))
