@@ -20,7 +20,7 @@ const app = express();
 app.use(
     cors({
       credentials: true,
-      origin:["http://localhost:3000","https://cocorayado.netlify.app"]
+      origin:["http://localhost:3000","https://cocorayado.netlify.app","https://cocorayado.herokuapp.com"]
     })
   );
 
