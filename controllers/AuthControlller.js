@@ -34,7 +34,7 @@ exports.signUp = (req, res, next) =>{
                     const newUser = clearRes(userCreated.toObject());
                     const token = createToken(userCreated);
                     res.cookie('token', token,{
-                        expires: new Date(Date.now+86400000),
+                        expires: new Date(Date.now+604800000),
                         secure:false,
                         httpOnly:true
                     }).status(200).json({result:newUser});
@@ -65,7 +65,7 @@ exports.login = (req, res, next) => {
                 const newUser = clearRes(user.toObject());
                 const token = createToken(user);
                 res.cookie('token', token,{
-                    expires: new Date(Date.now+86400000),
+                    expires: new Date(Date.now+604800000),
                     secure:false,
                     httpOnly:true
                 }).status(200).json({result:newUser});

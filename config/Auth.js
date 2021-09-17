@@ -4,7 +4,7 @@ const User = require('../models/User')
 //Create session token
 exports.createToken = (user) => {
     const token = jwt.sign({id:user._id},process.env.SECRET,{
-        expiresIn:'1d'
+        expiresIn:'7d'
     })
 
     return token
