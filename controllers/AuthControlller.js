@@ -4,7 +4,7 @@ const {createToken,clearRes} = require('../config/Auth');
 
 //Crear usuario
 exports.signUp = (req, res, next) =>{
-    const {email, username, password, confirmPassword, role, ...restUser} = req.body;
+    const {email, username, password, confirmPassword, ...restUser} = req.body;
 
     //Verificar que los passwords sean iguales
     if(password != confirmPassword) {
@@ -25,7 +25,6 @@ exports.signUp = (req, res, next) =>{
                     email,
                     password:hashedPass,
                     username,
-                    role,
                     ...restUser
                 }
 
@@ -77,6 +76,31 @@ exports.login = (req, res, next) => {
         })
     })
     .catch(error=>res.status(400).json({error}));
+}
+
+//Cambiar password
+exports.changePassword = (req,res,next) =>{
+    const {currentPassword, newPassword} = req.body;
+    const {password, _id} = req.user;
+     //Verificar password
+     bcrypt.compare(currentPassword,password)
+     .then(match=>{
+         if(match) {
+             //Generar nuevo password
+             bcrypt.hash(newPassword,10)
+             .then(hashedPass=>{
+                User.findByIdAndUpdate(_id,{password:hashedPass},{new:true})
+                .then(user => {
+                  res.status(200).json({result:user})
+                })
+             })
+             .catch(error=>res.status(400).json({error}));
+         }
+         else {
+             return res.status(403).json({msg:'La contraseña es erronea.'});
+         }
+     })
+     .catch(error=>res.status(400).json({error}));
 }
 
 //Obtener data del usuario logeado

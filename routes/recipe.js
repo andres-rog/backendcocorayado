@@ -7,7 +7,7 @@ const { upload } = require('../controllers/CloudinaryController');
 router.post('/create', verifyToken, createRecipe);
 router.post('/findRecipes', verifyToken, findRecipes);
 router.post('/findRecipe', verifyToken, findRecipe);
-router.post('/editRecipe', verifyToken, editRecipe);
+router.patch('/editRecipe', verifyToken, editRecipe);
 router.post('/deleteRecipe', verifyToken, deleteRecipe);
 router.post('/upload', verifyToken, uploadCloud.array('imagenesReceta', 16),upload)
 

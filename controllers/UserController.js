@@ -66,3 +66,16 @@ exports.listRecipes = (req, res, next) => {
     })
     .catch( error => res.status(400).json({error}));
 }
+
+//Edit user
+exports.editUser = (req, res, next) => {
+  const{_id} = req.user;
+  const{ingredientesFavoritos, username, email} = req.body;
+  const newData = {ingredientesFavoritos, username, email}
+  console.log("newData",newData);
+  User.findByIdAndUpdate(_id,newData,{new:true})
+  .then(user => {
+    res.status(200).json({result:user})
+  })
+  .catch( error => res.status(400).json({error}))
+}

@@ -111,3 +111,15 @@ exports.findRecipes = (req, res, next) => {
     })
     .catch( error => res.status(400).json({error}))
 }
+
+//Edit Recipe
+exports.editRecipe = (req, res, next) => {
+    const{_id,...newData} = req.body;
+    console.log("REQ BODYYYY",req.body);
+    console.log("newData",newData);
+    Recipe.findByIdAndUpdate(_id,newData,{new:true})
+    .then(recipe => {
+      res.status(200).json({result:recipe})
+    })
+    .catch( error => res.status(400).json({error}))
+}
